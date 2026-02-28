@@ -1,0 +1,23 @@
+const MAX_ATTEMPTS = 5;
+
+let attempt = 0;
+let success = false;
+
+do {
+    attempt++;
+    const randomValue = Math.random();
+    success = randomValue > 0.6;
+
+    if (success) {
+        console.log(`Attempt ${attempt}: SUCCESS (Response 200 OK)`);
+    } else {
+        console.log(`Attempt ${attempt}:  FAILED (Timeout/Error)`);
+    }
+
+} while (!success && attempt < MAX_ATTEMPTS);
+
+if (success) {
+    console.log(`\nAPI call PASSED after ${attempt} attempt(s).`);
+} else {
+    console.log(`\nAPI call FAILED after ${MAX_ATTEMPTS} attempt(s). Max retries reached.`);
+}

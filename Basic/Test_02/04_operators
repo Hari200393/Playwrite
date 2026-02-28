@@ -1,0 +1,40 @@
+let isPresent   = true;
+let isDisplayed = true;
+let isEnabled   = false;
+
+// ── Determine Status ──
+let status;
+if (!isPresent) {
+    status = "NOT FOUND";
+} else if (!isDisplayed) {
+    status = "HIDDEN";
+} else if (!isEnabled) {
+    status = "DISABLED";
+} else {
+    status = "READY";
+}
+
+let severity;
+
+if (!isPresent) {
+  severity = "CRITICAL";
+} else if (!isDisplayed || !isEnabled) {
+  severity = "WARNING";
+} else {
+  severity = "OK";
+}
+
+let action;
+if (!isPresent) {
+    action = "Element not found in DOM. Verify selector or wait for page load.";
+} else if (isPresent && !isDisplayed) {
+    action = "Element exists but is hidden. Scroll into view or check visibility conditions.";
+} else if (isPresent && isDisplayed && !isEnabled) {
+    action = "Element is visible but disabled. Wait for enable state or check preconditions.";
+} else if (isPresent && isDisplayed && isEnabled) {
+    action = "Element is ready for interaction. Proceed with test execution.";
+}
+
+console.log(`Status   : ${status}`);
+console.log(`Severity : ${severity}`);
+console.log(`Action   : ${action}`);
